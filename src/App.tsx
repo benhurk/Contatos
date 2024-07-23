@@ -1,17 +1,29 @@
-import React from 'react';
+import EditPage from './pages/Edit';
+import MainPage from './pages/Main';
+import store from './store';
+
 import GlobalStyles from './styles';
-import Sidebar from './containers/Sidebar';
-import List from './containers/List';
+import { Provider } from 'react-redux';
+
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+const routes = createBrowserRouter([
+  {
+    path: '/',
+    element: <MainPage />
+  },
+  {
+    path: '/edit/:name',
+    element: <EditPage />
+  }
+])
 
 function App() {
   return (
-    <>
+    <Provider store={store}>
       <GlobalStyles />
-      <Sidebar />
-      <main>
-        <List />
-      </main>
-    </>
+      <RouterProvider router={routes} />
+    </Provider>
   );
 }
 
